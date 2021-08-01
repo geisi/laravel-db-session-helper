@@ -16,12 +16,12 @@
         }
     ],
     "require": {
-        "php": "^7.2|^8.0",
+        "php": "^8.0",
         "spatie/laravel-package-tools": "^1.4.3",
         "illuminate/auth": "^8.0",
         "illuminate/container": "^8.0",
         "illuminate/contracts": "^8.0",
-        "illuminate/database": "^8.4.2"
+        "illuminate/database": "^8.42"
     },
     "require-dev": {
         "brianium/paratest": "^6.3",
