@@ -1,6 +1,6 @@
 {
     "name": "geisi/laravel-db-session-helper",
-    "description": "This is my package LaravelDbSessionHelper",
+    "description": "This package is build on top of the Laravel session database driver. With it you are able to query users by their login state.",
     "keywords": [
         "geisi",
         "laravel",
