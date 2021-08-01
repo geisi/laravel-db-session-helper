@@ -1,3 +1,4 @@
+⚠️ Laravel DB Session Helper is under development - use at your own risk.
 # Laravel helper package for the database session driver
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/geisi/laravel-db-session-helper.svg?style=flat-square)](https://packagist.org/packages/geisi/laravel-db-session-helper)
@@ -67,6 +68,11 @@ You can change this timespan with the login_time_span configuration value.
 
 You can extend or replace our Session model with your own. The only necessary thing to do is to implement the
 Geisi\LaravelDbSessionHelper\Contracts\Session contract interface.
+
+## Beta
+
+This package is currently in Beta state. As we cannot guarantee 100% stability and feature safety we don't recommend using this package in production.
+Please submit possible bugs under issues.
 
 ## Testing
 
