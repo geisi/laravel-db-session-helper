@@ -23,7 +23,7 @@ class TestCase extends Orchestra
         $this->testSession = Session::forceCreate([
             'id' => Str::uuid(),
             'user_id' => $this->testUser->id,
-            'last_activity' => $this->recentlyLoggedInDate
+            'last_activity' => $this->recentlyLoggedInDate,
         ]);
 
         $this->testNotOnlineUser = User::forceCreate(['email' => 'second@test.de']);
@@ -32,7 +32,7 @@ class TestCase extends Orchestra
         Session::forceCreate([
             'id' => Str::uuid(),
             'user_id' => $this->testNotOnlineUser->id,
-            'last_activity' => $this->pastLoggedInDate
+            'last_activity' => $this->pastLoggedInDate,
         ]);
     }
 

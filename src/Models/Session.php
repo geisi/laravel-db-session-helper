@@ -10,7 +10,7 @@ class Session extends Model implements SessionContract
 {
     public $timestamps = false;
     protected $casts = [
-        'last_activity' => 'datetime'
+        'last_activity' => 'datetime',
     ];
     protected $keyType = 'string';
 

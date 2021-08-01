@@ -25,14 +25,14 @@ class UserSessionRelationshipTest extends TestCase
         $this->testSession = Session::forceCreate([
             'id' => Str::uuid(),
             'user_id' => $this->testUser->id,
-            'last_activity' => $beforeRecentlyLoggedInDate
+            'last_activity' => $beforeRecentlyLoggedInDate,
         ]);
         $this->assertTrue($this->testUser->fresh()->session->last_activity->equalTo($this->recentlyLoggedInDate));
 
         $this->testSession = Session::forceCreate([
             'id' => Str::uuid(),
             'user_id' => $this->testUser->id,
-            'last_activity' => $beforeRecentlyLoggedInDate->addMinutes(20)
+            'last_activity' => $beforeRecentlyLoggedInDate->addMinutes(20),
         ]);
 
         $this->assertTrue($this->testUser->fresh()->session->last_activity->equalTo($beforeRecentlyLoggedInDate));
