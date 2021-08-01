@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 class SessionModelTest extends TestCase
 {
     use RefreshDatabase;
+
     public function setUp(): void
     {
         parent::setUp();
