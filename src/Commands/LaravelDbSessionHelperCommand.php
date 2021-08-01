@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Geisi\LaravelDbSessionHelper\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class LaravelDbSessionHelperCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-db-session-helper';
 
     public $description = 'My command';
 
