@@ -13,10 +13,9 @@ class SessionModelTest extends TestCase
         $this->testSession = Session::forceCreate([
             'id' => Str::uuid(),
             'user_id' => $this->testUser->id,
-            'last_activity' => $this->recentlyLoggedInDate
+            'last_activity' => $this->recentlyLoggedInDate,
         ]);
     }
-
 
     public function test_is_online_attribute_is_right()
     {
