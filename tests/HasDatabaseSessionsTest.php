@@ -4,6 +4,7 @@ namespace Geisi\LaravelDbSessionHelper\Tests;
 
 class HasDatabaseSessionsTest extends TestCase
 {
+
     public function setUp(): void
     {
         parent::setUp();
@@ -16,6 +17,7 @@ class HasDatabaseSessionsTest extends TestCase
 
     public function test_it_can_scope_logged_out_users()
     {
+        User::isOffline()->dump();
         $this->assertTrue(User::isOffline()->count() === 2);
     }
 

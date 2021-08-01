@@ -3,10 +3,12 @@
 namespace Geisi\LaravelDbSessionHelper\Tests;
 
 use Geisi\LaravelDbSessionHelper\Models\Session;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 
 class SessionModelTest extends TestCase
 {
+    use RefreshDatabase;
     public function setUp(): void
     {
         parent::setUp();

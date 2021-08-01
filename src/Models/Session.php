@@ -21,7 +21,7 @@ class Session extends Model implements SessionContract
 
     public function getIsOnlineAttribute(): bool
     {
-        return $this->last_activity > now()->subMinutes(10);
+        return $this->last_activity->greaterThan(now()->subMinutes(config('db-session-helper.login_time_span')));
     }
 
     public function getLastLoginAttribute(): ?Carbon

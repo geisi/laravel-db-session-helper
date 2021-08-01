@@ -4,10 +4,12 @@ namespace Geisi\LaravelDbSessionHelper\Tests;
 
 use Geisi\LaravelDbSessionHelper\Models\Session;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 
 class UserSessionRelationshipTest extends TestCase
 {
+    use RefreshDatabase;
     public function test_relation_can_be_accessed()
     {
         $this->assertTrue($this->testUser->session instanceof \Geisi\LaravelDbSessionHelper\Contracts\Session);

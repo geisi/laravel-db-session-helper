@@ -11,7 +11,9 @@ trait HasDatabaseSessions
     public function scopeIsOnline(Builder $builder)
     {
         $builder->whereHas('session', function ($builder) {
-            $builder->where('last_activity', '>', now()->subMinutes(config('db-session-helper.login_time_span')));
+            $builder->where('last_activity', '>', config('database.default') == 'sqlite' ?
+                now()->subMinutes(config('db-session-helper.login_time_span'))
+                : now()->subMinutes(config('db-session-helper.login_time_span'))->timestamp);
         })
             ->with('session');
     }
@@ -20,7 +22,9 @@ trait HasDatabaseSessions
     {
         $builder->where(function (Builder $builder) {
             $builder->whereHas('session', function ($builder) {
-                $builder->where('last_activity', '<', now()->subMinutes(config('db-session-helper.login_time_span')));
+                $builder->where('last_activity', '<', config('database.default') == 'sqlite' ?
+                    now()->subMinutes(config('db-session-helper.login_time_span'))
+                    : now()->subMinutes(config('db-session-helper.login_time_span'))->timestamp);
             })->orWhereDoesntHave('session');
         })
             ->with('session');
