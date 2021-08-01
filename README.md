@@ -1,33 +1,14 @@
-# This is my package LaravelDbSessionHelper
+# Laravel helper package for the database session driver
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/geisi/laravel-db-session-helper.svg?style=flat-square)](https://packagist.org/packages/geisi/laravel-db-session-helper)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/geisi/laravel-db-session-helper/run-tests?label=tests)](https://github.com/geisi/laravel-db-session-helper/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/geisi/laravel-db-session-helper/Check%20&%20fix%20styling?label=code%20style)](https://github.com/geisi/laravel-db-session-helper/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/geisi/laravel-db-session-helper.svg?style=flat-square)](https://packagist.org/packages/geisi/laravel-db-session-helper)
 
----
-This repo can be used to scaffold a Laravel package. Follow these steps to get started:
+This package adds some niceties when using the database session driver in Laravel Projects. Its main purpose is to be
+able to filter users by their online state.
 
-1. Press the "Use template" button at the top of this repo to create a new repo with the contents of this
-   laravel-db-session-helper
-2. Run "./configure-laravel-db-session-helper.sh" to run a script that will replace all placeholders throughout all the
-   files
-3. Remove this block of text.
-4. Have fun creating your package.
-5. If you need help creating a package, consider picking up our <a href="https://laravelpackage.training">Laravel
-   Package Training</a> video course.
----
-
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
-
-## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/laravel-db-session-helper.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/laravel-db-session-helper)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can
-support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+It integrates well with Laravel Jetstream applications.
 
 ## Installation
 
@@ -37,31 +18,55 @@ You can install the package via composer:
 composer require geisi/laravel-db-session-helper
 ```
 
-You can publish and run the migrations with:
+First add HasDatabaseSessions trait to your User model(s):
 
-```bash
-php artisan vendor:publish --provider="Geisi\LaravelDbSessionHelper\LaravelDbSessionHelperServiceProvider" --tag="laravel-db-session-helper-migrations"
-php artisan migrate
+```php
+//User.php
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Geisi\LaravelDbSessionHelper\Traits\HasDatabaseSessions
+
+class User extends Authenticatable
+{
+    use HasDatabaseSessions;
+    
+    // ...
+}
 ```
 
 You can publish the config file with:
 ```bash
-php artisan vendor:publish --provider="Geisi\LaravelDbSessionHelper\LaravelDbSessionHelperServiceProvider" --tag="laravel-db-session-helper-config"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
+php artisan vendor:publish --provider="Geisi\LaravelDbSessionHelper\LaravelDbSessionHelperServiceProvider"
 ```
 
 ## Usage
 
 ```php
-$laravel-db-session-helper = new Geisi\LaravelDbSessionHelper();
-echo $laravel-db-session-helper->echoPhrase('Hello, Spatie!');
+//Query all online users
+\App\Models\User::isOnline()->get();
+//Query all offline users
+\App\Models\User::isOffline()->get();
+//Get user online state
+var_dump($user->is_online);
+// true or false
+//Get user last login date
+var_dump($user->last_login);
+// Carbon instance
 ```
+
+## Requirements
+
+To be able to run this package you need Laravel >= 8.42.x and PHP => 7.4 or PHP 8.0. In order to query the users session
+data the database session driver is needed.
+
+## Configuration
+
+By default the time span to determine if a user is online or offline is 10 minutes. So if a user does not interact with
+your application within 10 minutes he is gonna be queried as offline.
+
+You can change this timespan with the login_time_span configuration value.
+
+You can extend or replace our Session model with your own. The only necessary thing to do is to implement the
+Geisi\LaravelDbSessionHelper\Contracts\Session contract interface.
 
 ## Testing
 
@@ -83,7 +88,7 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [geisi](https://github.com/geisi)
+- [Tim Geisendörfer](https://github.com/geisi)
 - [All Contributors](../../contributors)
 
 ## License
