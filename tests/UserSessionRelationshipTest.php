@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 class UserSessionRelationshipTest extends TestCase
 {
     use RefreshDatabase;
+
     public function test_relation_can_be_accessed()
     {
         $this->assertTrue($this->testUser->session instanceof \Geisi\LaravelDbSessionHelper\Contracts\Session);
